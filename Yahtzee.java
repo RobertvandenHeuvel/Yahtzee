@@ -4,6 +4,13 @@ public class Yahtzee {
 
 	public static void main(String[] args) {
 		
+		YahtzeeSpel spel1 = new YahtzeeSpel();
+		spel1.spelen();
+	}
+
+}
+class YahtzeeSpel{
+	void spelen(){
 		int a = 0;
 		System.out.println("Speel met (Enter) en stop met (q).");
 		while (a == 0) {
@@ -23,5 +30,4 @@ public class Yahtzee {
 		}
 		}
 	}
-
 }
