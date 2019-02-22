@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Yahtzee {
@@ -5,6 +6,7 @@ public class Yahtzee {
 	public static void main(String[] args) {
 		
 		YahtzeeSpel spel1 = new YahtzeeSpel();
+		spel1.werpen();
 		spel1.spelen();
 	}
 
@@ -29,5 +31,11 @@ class YahtzeeSpel{
 			break;	
 		}
 		}
+	}
+	int werpen() {
+		Random random = new Random();
+		int dobbel = random.nextInt(6) + 1;
+		System.out.println(dobbel);
+		return dobbel;
 	}
 }
