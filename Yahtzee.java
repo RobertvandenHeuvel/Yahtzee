@@ -15,9 +15,10 @@ public class Yahtzee {
 
 }
 class YahtzeeSpel{
+	int aantalWorpen;
 	ArrayList<Dobbelsteen> dobbelstenen = new ArrayList();
 	Integer[] invoerArray = new Integer[5];
-	int[] blokkeerArray = new int[5];
+	int[] blokkeerArray = {0,0,0,0,0};
 	void dobbelstenenVerzamelen(){
 		for(int i = 0 ; i < 5; i ++) {
 			dobbelstenen.add(new Dobbelsteen());
@@ -28,24 +29,26 @@ class YahtzeeSpel{
 		//}
 	}
 	void spelen(){
-		int a = 0;
-		int aantalWorpen = 1;
-		System.out.println("Speel met (Enter) en stop met (q).");
+		aantalWorpen = 1;
 		Scanner scanner = new Scanner(System.in);
-		while (a == 0) {
-		String invoer = scanner.nextLine();
+		for(int j = 0; j<3 ;j++) {
+			System.out.println("Speel met (Enter) en stop met (q).");
+			String invoer = scanner.nextLine();
 			switch(invoer) {
 			case "":
 				System.out.println("WORP" + aantalWorpen);
 				System.out.println("12345");
-				for (Dobbelsteen deDobbelsteen: dobbelstenen) {
-					deDobbelsteen.werpen();
-					System.out.print(deDobbelsteen.dobbel);
+				for(int i = 0; i<5;i++) {
+					if (blokkeerArray[i] == 0) {
+						dobbelstenen.get(i).werpen();
+						System.out.print(dobbelstenen.get(i).dobbel);
+					}else {
+						System.out.print("1");
+					}
 				}
 				System.out.println();
 				vasthouden();
 				aantalWorpen++;
-				System.out.print("Speel met (Enter) en stop met (q).");
 				break;
 			case "q":
 				System.out.println("Het spel is over.");
@@ -58,28 +61,32 @@ class YahtzeeSpel{
 		}
 	}
 	Integer[] vasthouden() {
-		System.out.println("Voer een 0 in voor de dobbelstenen die je opnieuw wil gooien en 1 voor de worpen die je wilt vasthouden (bijv. 00110).");
-		Scanner scanner2 = new Scanner(System.in);
-		String invoer2 = scanner2.nextLine();
-		Integer x = Integer.parseInt(invoer2);
-		//System.out.println(invoer2);
-		//System.out.println(x);
-		for (int i = 0; i<invoerArray.length; i++) {
-			int d = x%10;
-			invoerArray[i] = d;
-		//	System.out.print(invoerArray[i]);
-			x /= 10;
+		switch(aantalWorpen) {
+		case 3:
+			return invoerArray;
+		default:
+			System.out.println("Voer een 0 in voor de dobbelstenen die je opnieuw wil gooien en 1 voor de worpen die je wilt vasthouden (bijv. 00110).");
+			Scanner scanner2 = new Scanner(System.in);
+			String invoer2 = scanner2.nextLine();
+			Integer x = Integer.parseInt(invoer2);
+			//System.out.println(invoer2);
+			//System.out.println(x);
+			for (int i = 0; i<invoerArray.length; i++) {
+				int d = x%10;
+				invoerArray[i] = d;
+			//	System.out.print(invoerArray[i]);
+				x /= 10;
+				}
+		    Collections.reverse(Arrays.asList(invoerArray)); 
+			//for (int i = 0; i<invoerArray.length; i++) {
+			//	System.out.print(invoerArray[i]);
+			//}
+			for(int i = 0;i<blokkeerArray.length; i++) {
+				blokkeerArray[i] = invoerArray[i];
+			//	System.out.print(blokkeerArray[i]);
 			}
-	    Collections.reverse(Arrays.asList(invoerArray)); 
-		for (int i = 0; i<invoerArray.length; i++) {
-			System.out.print(invoerArray[i]);
+			return invoerArray;
 		}
-		for(int i = 0;i<blokkeerArray.length; i++) {
-			blokkeerArray[i] = invoerArray[i];
-		//	System.out.print(blokkeerArray[i]);
-		}
-		System.out.println();
-		return invoerArray;
 	}
 }
 class Dobbelsteen{
