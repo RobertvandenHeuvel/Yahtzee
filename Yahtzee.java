@@ -29,6 +29,19 @@ class YahtzeeSpel{
 		Scanner scanner = new Scanner(System.in);
 		for(int j = 0; j<100 ;j++) {
 			String huidigeTotaal = "";
+			if (huidigeTotaal == "11111") {
+				System.out.println("Yahtzee! Het spel is afgelopen.");
+			}else if (huidigeTotaal == "22222") {
+				System.out.println("Yahtzee! Het spel is afgelopen.");
+			}else if (huidigeTotaal == "33333") {
+				System.out.println("Yahtzee! Het spel is afgelopen.");
+			}else if (huidigeTotaal == "44444") {
+				System.out.println("Yahtzee! Het spel is afgelopen.");
+			}else if (huidigeTotaal == "55555") {
+				System.out.println("Yahtzee! Het spel is afgelopen.");
+			}else if (huidigeTotaal == "66666") {
+				System.out.println("Yahtzee! Het spel is afgelopen.");
+			}
 			System.out.println("Speel met (Enter) en stop met (q).");
 			String invoer = scanner.nextLine();
 			switch(invoer) {
@@ -58,42 +71,34 @@ class YahtzeeSpel{
 				System.out.println("Verkeerde invoer. Speel met (Enter) en stop met (q).");
 				break;	
 			}
-			if (huidigeTotaal == "11111") {
-				System.out.println("Yahtzee! Het spel is afgelopen.");
-			}else if (huidigeTotaal == "22222") {
-				System.out.println("Yahtzee! Het spel is afgelopen.");
-			}else if (huidigeTotaal == "33333") {
-				System.out.println("Yahtzee! Het spel is afgelopen.");
-			}else if (huidigeTotaal == "44444") {
-				System.out.println("Yahtzee! Het spel is afgelopen.");
-			}else if (huidigeTotaal == "55555") {
-				System.out.println("Yahtzee! Het spel is afgelopen.");
-			}else if (huidigeTotaal == "66666") {
-				System.out.println("Yahtzee! Het spel is afgelopen.");
-			}
 		}
 	}
-	int[] vasthouden() {
+	int[] vasthouden() { //verkeerde invoer leidt tot exceptions
 			System.out.println("Welke posities wilt u vasthouden? 0 voor geen, anders bijvoorbeeld 124.");
+			int NogEenKeerInput = 1;
 			Scanner scanner2 = new Scanner(System.in);
-			String invoer2 = scanner2.nextLine();
-			int invoer2Int = Integer.parseInt(invoer2);
-			if (invoer2Int == 0) {
+			while(NogEenKeerInput>0) {
+				String invoer2 = scanner2.nextLine();
+				int invoer2Int = Integer.parseInt(invoer2);
+				if (invoer2Int == 0) {
 				System.out.println("Geen dobbelstenen vastgehouden.");
-				return blokkeerArray;
+				NogEenKeerInput--;
 			}
-			else {
+			else if (invoer2Int > 0 && invoer2Int <=12345) {
+				for(int i = 0; i<5; i++) {
+					blokkeerArray[i] = 0;
+				}
 				for (int i = 0; i< invoer2.length(); i++) {
 					int blokkeren = Integer.parseInt(invoer2.substring(i,i+1)) -1;
 					blokkeerArray[blokkeren] = 1;
 					}
-				for(int i=0;i<dobbelstenen.size();i++) {
-					if(blokkeerArray[i] == 1) {
-					//	System.out.println("Vastgehouden dobbelstenen: " + Arrays.toString(blokkeerArray));
-					}
-				}
-				return blokkeerArray;
+				NogEenKeerInput--;
 			}
+			else {
+				System.out.println("Verkeerde invoer. Welke posities wilt u vasthouden? 0 voor geen, anders bijvoorbeeld 124.");
+			}
+		}
+			return blokkeerArray;
 	}
 }
 class Dobbelsteen{
@@ -102,7 +107,7 @@ class Dobbelsteen{
 	int werpen() {
 		Random random = new Random();
 		dobbel = random.nextInt(6) + 1;
-	//	System.out.println(dobbel);
+		worpGeschiedenis = "";
 		worpGeschiedenis += dobbel;
 		return dobbel;
 	}
