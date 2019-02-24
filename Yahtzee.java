@@ -58,6 +58,19 @@ class YahtzeeSpel{
 				System.out.println("Verkeerde invoer. Speel met (Enter) en stop met (q).");
 				break;	
 			}
+			if (huidigeTotaal == "11111") {
+				System.out.println("Yahtzee! Het spel is afgelopen.");
+			}else if (huidigeTotaal == "22222") {
+				System.out.println("Yahtzee! Het spel is afgelopen.");
+			}else if (huidigeTotaal == "33333") {
+				System.out.println("Yahtzee! Het spel is afgelopen.");
+			}else if (huidigeTotaal == "44444") {
+				System.out.println("Yahtzee! Het spel is afgelopen.");
+			}else if (huidigeTotaal == "55555") {
+				System.out.println("Yahtzee! Het spel is afgelopen.");
+			}else if (huidigeTotaal == "66666") {
+				System.out.println("Yahtzee! Het spel is afgelopen.");
+			}
 		}
 	}
 	int[] vasthouden() {
