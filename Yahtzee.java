@@ -28,17 +28,22 @@ class YahtzeeSpel{
 	}
 	void spelen(){
 		int a = 0;
+		int aantalWorpen = 1;
 		System.out.println("Speel met (Enter) en stop met (q).");
 		Scanner scanner = new Scanner(System.in);
 		while (a == 0) {
 		String invoer = scanner.nextLine();
 			switch(invoer) {
 			case "":
+				System.out.println("WORP" + aantalWorpen);
+				System.out.println("12345");
 				for (Dobbelsteen deDobbelsteen: dobbelstenen) {
 					deDobbelsteen.werpen();
-					System.out.println(deDobbelsteen.dobbel);
+					System.out.print(deDobbelsteen.dobbel);
 				}
+				System.out.println();
 				vasthouden();
+				aantalWorpen++;
 				System.out.print("Speel met (Enter) en stop met (q).");
 				break;
 			case "q":
@@ -65,15 +70,12 @@ class YahtzeeSpel{
 		//	System.out.print(invoerArray[i]);
 			x /= 10;
 			}
-		reverse(invoerArray);
+	    Collections.reverse(Arrays.asList(invoerArray)); 
 		for (int i = 0; i<invoerArray.length; i++) {
-			System.out.println(invoerArray[i]);
+			System.out.print(invoerArray[i]);
 		}
+		System.out.println();
 	}
-	static void reverse(Integer a[]){ 
-	    Collections.reverse(Arrays.asList(a)); 
-	  //  System.out.println(Arrays.asList(a)); 
-		}
 }
 class Dobbelsteen{
 	int dobbel;
@@ -83,18 +85,4 @@ class Dobbelsteen{
 	//	System.out.println(dobbel);
 		return dobbel;
 	}
-}
-class GetallenInArray{
-	//Integer[] x = new Integer[5];
-	//int num = 12345;
-	//for (int i = 0; i<5; i++) {
-	//int d = num%10;
-	//x[i] = d;
-	//System.out.println(x[i]);
-	//num /= 10;
-	//}
-	
-   // reverse(x); 
-
-//function reverses the elements of the array
 }
