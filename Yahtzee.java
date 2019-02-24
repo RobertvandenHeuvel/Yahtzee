@@ -16,6 +16,7 @@ public class Yahtzee {
 }
 class YahtzeeSpel{
 	ArrayList<Dobbelsteen> dobbelstenen = new ArrayList();
+	Integer[] invoerArray = new Integer[5];
 	int[] blokkeerArray = new int[5];
 	void dobbelstenenVerzamelen(){
 		for(int i = 0 ; i < 5; i ++) {
@@ -56,14 +57,13 @@ class YahtzeeSpel{
 			}
 		}
 	}
-	void vasthouden() {
+	Integer[] vasthouden() {
 		System.out.println("Voer een 0 in voor de dobbelstenen die je opnieuw wil gooien en 1 voor de worpen die je wilt vasthouden (bijv. 00110).");
 		Scanner scanner2 = new Scanner(System.in);
 		String invoer2 = scanner2.nextLine();
 		Integer x = Integer.parseInt(invoer2);
 		//System.out.println(invoer2);
 		//System.out.println(x);
-		Integer[] invoerArray = new Integer[5];
 		for (int i = 0; i<invoerArray.length; i++) {
 			int d = x%10;
 			invoerArray[i] = d;
@@ -74,7 +74,12 @@ class YahtzeeSpel{
 		for (int i = 0; i<invoerArray.length; i++) {
 			System.out.print(invoerArray[i]);
 		}
+		for(int i = 0;i<blokkeerArray.length; i++) {
+			blokkeerArray[i] = invoerArray[i];
+		//	System.out.print(blokkeerArray[i]);
+		}
 		System.out.println();
+		return invoerArray;
 	}
 }
 class Dobbelsteen{
