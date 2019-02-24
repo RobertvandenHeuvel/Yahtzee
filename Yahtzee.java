@@ -17,7 +17,6 @@ public class Yahtzee {
 class YahtzeeSpel{
 	int aantalWorpen;
 	ArrayList<Dobbelsteen> dobbelstenen = new ArrayList();
-	Integer[] invoerArray = new Integer[5];
 	int[] blokkeerArray = {0,0,0,0,0};
 	void dobbelstenenVerzamelen(){
 		for(int i = 0 ; i < 5; i ++) {
@@ -43,7 +42,7 @@ class YahtzeeSpel{
 						dobbelstenen.get(i).werpen();
 						System.out.print(dobbelstenen.get(i).dobbel);
 					}else {
-						System.out.print("1");
+						System.out.print("0");
 					}
 				}
 				System.out.println();
@@ -60,33 +59,34 @@ class YahtzeeSpel{
 			}
 		}
 	}
-	Integer[] vasthouden() {
-		switch(aantalWorpen) {
-		case 3:
-			return invoerArray;
-		default:
-			System.out.println("Voer een 0 in voor de dobbelstenen die je opnieuw wil gooien en 1 voor de worpen die je wilt vasthouden (bijv. 00110).");
+	int[] vasthouden() {
+		//switch(aantalWorpen) {
+		//case 3:
+		//	return invoerArray;
+		//default:
+			System.out.println("Welke posities wilt u vasthouden? 0 voor geen, anders bijvoorbeeld 124.");
 			Scanner scanner2 = new Scanner(System.in);
 			String invoer2 = scanner2.nextLine();
-			Integer x = Integer.parseInt(invoer2);
 			//System.out.println(invoer2);
 			//System.out.println(x);
-			for (int i = 0; i<invoerArray.length; i++) {
-				int d = x%10;
-				invoerArray[i] = d;
-			//	System.out.print(invoerArray[i]);
-				x /= 10;
-				}
-		    Collections.reverse(Arrays.asList(invoerArray)); 
-			//for (int i = 0; i<invoerArray.length; i++) {
-			//	System.out.print(invoerArray[i]);
-			//}
-			for(int i = 0;i<blokkeerArray.length; i++) {
-				blokkeerArray[i] = invoerArray[i];
-			//	System.out.print(blokkeerArray[i]);
+			int invoer2Int = Integer.parseInt(invoer2);
+			if (invoer2Int == 0) {
+				System.out.println("Geen dobbelstenen vastgehouden.");
+				return blokkeerArray;
 			}
-			return invoerArray;
-		}
+			else {
+				for (int i = 0; i< invoer2.length(); i++) {
+					int blokkeren = Integer.parseInt(invoer2.substring(i,i+1)) -1;
+					blokkeerArray[blokkeren] = 1;
+					}
+				for(int i=0;i<dobbelstenen.size();i++) {
+					if(blokkeerArray[i] == 1) {
+						System.out.println("Vastgehouden dobbelstenen: " + Arrays.toString(blokkeerArray));
+					}
+				}
+				return blokkeerArray;
+			}
+		//}
 	}
 }
 class Dobbelsteen{
